@@ -1,0 +1,6 @@
+# list of DB-s to ignore separated by "|"
+m_ignore_db="information_schema|performance_schema|sys"
+
+# Backup destination basedir where (daily|weekly|monthly)
+# will be created
+bdir="/mnt/storage/backups/mariadb"
