@@ -3,7 +3,7 @@ set -euo pipefail
 #
 # mariadb-backupper.sh
 # Copyright 2025 by Marko Punnar <marko[AT]aretaja.org>
-# Version: 1.0.0
+# Version: 1.0.1
 #
 # Script to make MariaDB backups of your data to remote target.
 # Must be executed as root.
@@ -23,6 +23,7 @@ set -euo pipefail
 #
 # Changelog:
 # 1.0.0 Initial release
+# 1.0.1 Fix error if target dir exists
 
 # show help if requested
 if [[ "$1" = '-h' ]] || [[ "$1" = '--help' ]]
@@ -132,7 +133,7 @@ then
     target="weekly"
 fi
 
-mkdir "$target"
+mkdir -p "$target"
 
 # Make backup
 if result=$(mariadb -N -B -e 'SHOW DATABASES;' |grep -Pv "^(information_schema|performance_schema|sys|${m_ignore_db})$")
